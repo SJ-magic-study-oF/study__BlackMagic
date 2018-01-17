@@ -1,0 +1,92 @@
+/************************************************************
+概要
+	mac間での画面転送について調査した内容のまとめ.
+
+結論
+	Black Magicのmini recorder x oF(https://github.com/kylemcdonald/ofxBlackmagic)で対応.
+************************************************************/
+
+
+
+/************************************************************
+************************************************************/
+■Texture sync between OF on linux and other apps / systems
+	https://forum.openframeworks.cc/t/texture-sync-between-of-on-linux-and-other-apps-systems/23637
+	
+	contents
+		you can grab external video using an external capture card. 
+		I use BlackMagic MiniRecorder daily to capture HDMI or SDI sources in VDMX or Millumin without hassle
+		This is an hardware solution that is pretty cheap but works well.
+		You need a Thunderbolt port though.
+		
+	contents : conclusion
+		"Thanks everyone. Since I don't have a Thunderbolt port, I decided to use an HDMI to USB 3.0 capture device. Works fine, only needs HDMI output from another computer and registers as a webcam."
+
+	BlackMagic
+		https://www.amazon.co.jp/Blackmagic-%E5%B0%8F%E5%9E%8B%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC-UltraStudio-Recorder-001846/dp/B009D91314
+
+
+■Live video sourced from another Mac
+	http://kineme.net/forum/DevelopingCompositions/LivevideosourcedfromanotherMac
+	
+
+/************************************************************
+TCPSyphon/ UDPSyphon
+************************************************************/
+■TCPSyphonとUDPSyphonの違いについて
+	http://techlife.sg/UDPSyphon/index_jp.html
+	
+	contents
+		配信先が１つや２つの場合で、確実に高いフレームレートで送出したい場合は、TCPSyphonをお使いください。
+		
+	検討結果
+		ことなるPC間での画像送信はできたが、処理が非常に重かった(CPU占有率が高い).
+		これでは意味がないので、Hardwareを用いた手法(BlackMagic)を再調査.
+		
+		
+/************************************************************
+oF x Blackmagic
+************************************************************/
+■oF x Blackmagic
+	https://github.com/kylemcdonald/ofxBlackmagic
+	
+	■Full HD映像をMacに入力してoFでリアルタイムにエフェクトをかける
+		http://yasnis.net/openframeworks/bmd_decklink
+		
+		contents
+			上記addonの使い方.
+		
+	■ofxBlackMagicの色の調整
+		https://qiita.com/yasuhiro_chida/items/ab4417aac5ca0ca9d1ac
+		
+	■[oF] THETA Sのライブビューをリアルタイムにパノラマ画像に変換
+		http://yasuhirohoshino.com/archives/113
+		
+		contents
+			2015年11月24日現在、ofxBlackMagicを使用したところ、アプリを実行すると延々とログを吐きまくって一向に起動しないバグがありました。。。
+			ofxBlackMagic.cppのgetColorPixels()内のコメントアウトを外すと動きます。githubでIssue出しておきました。
+
+
+■ofxDeckLink
+	https://github.com/hanasaan/ofxDeckLink
+	
+	
+/************************************************************
+Blackmagic mini recorder
+************************************************************/
+■第598回:激安HDMIキャプチャ、BMD「UltraStudio Mini」
+	https://av.watch.impress.co.jp/docs/series/zooma/580959.html
+	
+	contents
+		mini recorder	:cam	-映像->	pc
+		mini monitor	:pc		-映像->	monitor
+		
+■VDMX5で新VJ機材Blackmagic mini recorderを使ってみた
+	https://www.youtube.com/watch?v=kRroeFA4DZ8
+	
+	contents
+		HD対応のHDMIキャプチャボックスBlackmagic mini recorderを使って、右側のPCの映像出力を左側のPCに取り込み、VJソフトのVDMX5でMixしてみました。
+		
+
+
+		

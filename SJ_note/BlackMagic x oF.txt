@@ -1,0 +1,90 @@
+/************************************************************
+oF x Blackmagic
+************************************************************/
+■oF x Blackmagic
+	https://github.com/kylemcdonald/ofxBlackmagic
+	
+	■Full HD映像をMacに入力してoFでリアルタイムにエフェクトをかける
+		http://yasnis.net/openframeworks/bmd_decklink
+		
+		contents
+			上記addonの使い方.
+		
+	■ofxBlackMagicの色の調整
+		https://qiita.com/yasuhiro_chida/items/ab4417aac5ca0ca9d1ac
+		
+	■[oF] THETA Sのライブビューをリアルタイムにパノラマ画像に変換
+		http://yasuhirohoshino.com/archives/113
+		
+		contents
+			2015年11月24日現在、ofxBlackMagicを使用したところ、アプリを実行すると延々とログを吐きまくって一向に起動しないバグがありました。。。
+			ofxBlackMagic.cppのgetColorPixels()内のコメントアウトを外すと動きます。githubでIssue出しておきました。
+
+
+/************************************************************
+actual operation in Accordance with the site below,
+	https://github.com/kylemcdonald/ofxBlackmagic
+************************************************************/
+> First, install the Black Magic software. If you are using an UltraStudio Mini Recorder, you should download "Desktop Video 10.8.1 for Macintosh". 
+	install Black Magic software.
+		https://www.blackmagicdesign.com/support/
+	i downloaded "Desktop Video 10.9.7" for mac.
+	
+	connect Hardware.
+	start install.
+	Reboot mac as installer says.
+	
+
+> After installation, go to System Preferences, click "Black Magic Desktop Video", click on your device, and make sure "1080PsF" is un-checked (this option is only available when the capture card is plugged in). 
+> If you dont un-check this option, nothing will work.
+	何故か、環境設定からは"Blackmagic Desktop Video"が起動できなかった。
+	直接、アプリケーションフォルダへ行き、"Desktop Video Setup.app"を起動.
+	
+	setting
+		Video input/Input connection	:HDMI
+		Conversions						:None
+		
+
+> Then go to the support page and download the DeckLink SDK (currently at version 10.8). 
+> After unzipping the SDK open the app Mac/Samples/bin/CapturePreview and hit "Start". 
+> The app should automatically detect the mode of your camera.
+	Again i visited,
+		https://www.blackmagicdesign.com/support/
+		
+	and i downloaded DeckLink SDK.
+	説明では、"DeckLink SDKをdownload"と書いてあるが、
+		Desktop Video 10.9.5 SDK
+	をdownload.
+	downloadされたフォルダは、"Blackmagic_DeckLink_SDK_10.9.5.zip"であった(わかりにくい).
+	
+	appが自動でdetect the mode of your cameraと言うのは本当で、
+	source側のmacを自動でdetectし、勝手にVideo Formatが変更されてsource側macの画面がcaptureされた.
+	mac_sourceのmodeは、ディスプレイ設定からsetされたモノ.
+	
+	
+> One you see the demo app working, try building and running the example/ that comes with ofxBlackMagic.
+	延々とLogを吐きまくって一向に起動しない..
+	
+	以下の記事を参考に、addonを修正してOK.
+		http://yasuhirohoshino.com/archives/113
+			2015年11月24日現在、ofxBlackMagicを使用したところ、アプリを実行すると延々とログを吐きまくって一向に起動しないバグがありました。。。
+			ofxBlackMagic.cppのgetColorPixels()内のコメントアウトを外すと動きます。githubでIssue出しておきました。
+	
+
+
+/************************************************************
+tips
+************************************************************/
+■
+mac_sourceのDisplay設定(解像度, RefreshRate)と
+cam.setup(W_BLACKMAGIC, H_BLACKMAGIC, 30);
+の整合を取ること.
+otherwise...起動時Errorなど
+
+■
+mac_sourceのDisplay設定でミラーリングをオフにすると、サブディスプレイのような動き.
+
+■
+CapturePreview.appが起動状態になっていると、oFとぶつかる.
+
+

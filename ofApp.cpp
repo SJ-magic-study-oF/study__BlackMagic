@@ -53,7 +53,6 @@ void ofApp::exit(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	float now = ofGetElapsedTimef();
-	
 	if(cam.update()){
 		float _FrameRate = 1 / (now - t_LastCamUpdate);
 		float smoothing = 0.9;
@@ -70,8 +69,10 @@ void ofApp::draw(){
 	fbo.begin();
 		ofClear(0, 0, 0, 0);
 		ofSetColor(255);
-		cam.drawColor();
+		
 		// cam.drawYuv();
+		// cam.drawGray();
+		cam.drawColor();
     fbo.end();
 	
 	/********************

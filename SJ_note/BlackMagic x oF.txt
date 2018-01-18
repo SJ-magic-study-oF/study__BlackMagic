@@ -29,6 +29,12 @@ actual operation in Accordance with the site below,
 	install Black Magic software.
 		https://www.blackmagicdesign.com/support/
 	i downloaded "Desktop Video 10.9.7" for mac.
+		->	i tried "Desktop Video 10.9.10" though the version of mac os does not match with mine.
+			And it worked well.
+			
+			BlackMagic says that
+				Reduce high CPU usage during capture.
+			with this version, but CPU usage seems same...(unfortunately)
 	
 	connect Hardware.
 	start install.
